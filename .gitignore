@@ -1,0 +1,13 @@
+# binaries
+pulse
+pulse.exe
+/bin/
+/dist/
+
+# go
+*.test
+*.out
+vendor/
+
+# local env
+.env
