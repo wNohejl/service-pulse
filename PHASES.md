@@ -3,17 +3,18 @@
 Target theme: reliability/platform engineering (telemetry, HA, build/release, security baselines) in Go.
 Cap: 6–8 h/week (learning-roadmap). Each phase exits with something demonstrable.
 
-## Phase 0 — Walking skeleton (~1 week)
-- [ ] Install Go toolchain; `go version` works (Go itself is a learning objective — first Go project)
-- [ ] `pulse serve`: HTTP service with `/healthz` + one real endpoint, graceful shutdown
-- [ ] GitHub Actions CI: build + `go vet` + tests on every push
-- *Exit:* clone → `go run` → curl healthz → green CI badge. **Learning:** Go modules, HTTP, project layout.
+## Phase 0 — Walking skeleton (done 2026-07-04)
+- [x] Install Go toolchain; `go version` works (go1.26.4, user-scope zip — MSI needs elevation)
+- [x] `pulse serve`: HTTP service with `/healthz`, `/readyz`, `/api/brew`, graceful shutdown
+- [x] GitHub Actions CI: `go vet` + build + tests on every push
+- *Exit:* clone → `go run` → curl healthz → green CI. ✅ **Learning:** Go modules, HTTP, project layout.
 
-## Phase 1 — Deep telemetry (~2 weeks)
-- [ ] Metrics registry: request count, latency histogram (p50/p95/p99), error rate
-- [ ] `/metrics` endpoint (Prometheus text format — industry standard, no dependency on running Prometheus)
-- [ ] Error-budget tracker: rolling window SLO (e.g. 99.5% success) with remaining-budget calculation
-- *Exit:* load the service with a script, watch p99 and error budget move. **Learning:** SLO/error-budget vocabulary, histogram buckets.
+## Phase 1 — Deep telemetry (done 2026-07-04)
+- [x] Metrics registry: request count, latency histogram (p50/p95/p99), error rate — dependency-free
+- [x] `/metrics` endpoint (Prometheus exposition format)
+- [x] Error-budget tracker: rolling-window SLO with remaining-budget calculation; `/api/stats` summary
+- [x] `-chaos` flag: verified live — 10% injected failures drove success to 0.83 and the 99.5% budget to -32
+- *Exit:* loaded with 60 requests, watched p99 and budget move. ✅ **Learning:** SLO/error-budget vocabulary, histogram buckets.
 
 ## Phase 2 — Watch: HA patterns (~2 weeks)
 - [ ] `pulse watch`: scrape health/metrics from N configured services
